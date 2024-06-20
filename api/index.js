@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import userRouter from './routes/user.route.js';
@@ -12,13 +13,16 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(cookieParser());
+// app.use(cors({
+//     origin: ' http://localhost:5173/*', // Replace with your client URL
+//     credentials: true // Allow credentials (cookies)
+//   }));
 
 mongoose.connect(process.env.MONGO).then(()=>{
     console.log('Connected to database');
 }).catch((err)=>{
     console.log(err);
 })
-
 
 app.listen(3000,()=>{
     console.log('server is runing on port 3000.!!');
